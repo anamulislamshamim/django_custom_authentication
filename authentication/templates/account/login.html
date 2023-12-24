@@ -1,0 +1,39 @@
+{% extends '../base.html' %}
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row centered py-4 align-items-center justify-content-center">
+        <form class="col-md-8" method="POST" novalidate>
+            {% comment %} add csrf token to prevent xss attack  {% endcomment %}
+            {% csrf_token %}
+            <div class="form-group my-2">
+                <h4 class="text-muted text-dark">Login to your account</h4>
+            </div>
+            <hr>
+            <div class="form-group my-3">
+                {% include "./message.html" %}
+            </div>
+            <div class="form-group my-1">
+                <label class="mb-1" for="username">Username or email</label>
+                {{form.username}}
+                {{form.username.errors}}
+            </div>
+            <div class="form-group my-1">
+                <label class="mb-1" for="password">Password</label>
+                {{form.password}}
+                {{form.password.errors}}
+            </div>
+            <div class="form-group d-grid gap-2 my-3">
+                <button type="submit" class="btn btn-dark">Login</button>
+            </div>
+            <div>
+                Have no account yet? please <a class="ms-2 text-primary" href="{% url 'registration' %}">Register here</a>
+            </div>
+            <div>
+                Forget Password? please <a class="ms-2 text-primary" href="{% url 'password_reset' %}">Reset Password</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
